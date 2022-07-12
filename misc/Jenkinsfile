@@ -4,6 +4,9 @@ node {
      checkout scm
      sh "git rev-parse --short HEAD > .git/commit-id"  
      commit_id = readFile('.git/commit-id').trim()
+     sh''''
+     $CMD || echo "string doesn't exist."
+     '''
    }
    stage('test') {
      nodejs(nodeJSInstallationName: 'nodejs') {
