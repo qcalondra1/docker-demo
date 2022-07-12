@@ -15,8 +15,4 @@ node {
        def app = docker.build("qcalondra/docker-nodejs-demo:${commit_id}", '.').push()
      }
    }
-        sh ''''
-        set +e
-        ..
-        '''
 }
