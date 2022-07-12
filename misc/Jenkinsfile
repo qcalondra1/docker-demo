@@ -3,28 +3,16 @@ node {
    stage('Preparation') {
      checkout scm
      sh "git rev-parse --short HEAD > .git/commit-id"  
-       sh ''''
-        set +e
-        ..
-        '''
      commit_id = readFile('.git/commit-id').trim()
    }
    stage('test') {
      nodejs(nodeJSInstallationName: 'nodejs') {
        sh 'npm install --only=dev'
-        sh ''''
-        set +e
-        ..
-        '''
      }
    }
    stage('docker build/push') {
      docker.withRegistry('https://index.docker.io/v2/', 'dockerhub') {
        def app = docker.build("qcalondra/docker-nodejs-demo:${commit_id}", '.').push()
-         sh ''''
-        set +e
-        ..
-        '''
      }
    }
 }
